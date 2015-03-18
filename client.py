@@ -4,7 +4,7 @@ from mock import Mock
 import requests
 
 
-REQUEST_PRINT_API = 'http://127.0.0.1:5000/api/request-coffee'
+REQUEST_COFFEE_API = 'http://127.0.0.1:5000/api/request-coffee'
 
 
 def wrapper_message_from_filename(file_path):
@@ -26,7 +26,7 @@ def main(path):
     message = wrapper_message_from_filename(path)
     a = message.attachments[0]
     files = {a.name: a.content}
-    requests.post(REQUEST_PRINT_API, data={
+    requests.post(REQUEST_COFFEE_API, data={
                     'location_email': message.to,
                     'user_email': message.fr
                 }, files=files)
