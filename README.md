@@ -1,3 +1,5 @@
+Make sure you have the requirements installed.
+
 To see this bug, run `python server.py` in one process.
 Then, open a new terminal and run `python client.py`. 
 
