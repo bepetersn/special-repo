@@ -1,7 +1,8 @@
-import email
-import gmail_client
+from StringIO import StringIO
 from mock import Mock
+import gmail_client
 import requests
+import email
 
 
 REQUEST_COFFEE_API = 'http://127.0.0.1:5000/api/request-coffee'
@@ -25,11 +26,10 @@ def wrapper_message_from_filename(file_path):
 def main(path):
     message = wrapper_message_from_filename(path)
     a = message.attachments[0]
-    files = {a.name: a.content}
-    requests.post(REQUEST_COFFEE_API, data={
-                    'location_email': message.to,
-                    'user_email': message.fr
-                }, files=files)
+    requests.post(REQUEST_COFFEE_API,
+                  data={'location_email': message.to,
+                        'user_email': message.fr},
+                  files={a.name: StringIO(a.content)})
 
 
 if __name__ == '__main__':
