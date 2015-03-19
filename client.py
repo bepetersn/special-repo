@@ -28,8 +28,10 @@ def main(path):
 
     # remove the newline that was present
     # because the line was wrapped 
-    a.name = a.name.replace('\n', '')
+    #a.name = a.name.replace('\n', '')
+
     import pdb; pdb.set_trace()
+
     requests.post(REQUEST_COFFEE_API,
                   data={'location_email': message.to,
                         'user_email': message.fr},
