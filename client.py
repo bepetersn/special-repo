@@ -1,4 +1,3 @@
-from StringIO import StringIO
 from mock import Mock
 import gmail_client
 import requests
@@ -26,10 +25,16 @@ def wrapper_message_from_filename(file_path):
 def main(path):
     message = wrapper_message_from_filename(path)
     a = message.attachments[0]
+
+    # remove the newline that was present
+    # because the line was wrapped 
+    a.name = a.name.replace('\n', '')
+    import pdb; pdb.set_trace()
     requests.post(REQUEST_COFFEE_API,
                   data={'location_email': message.to,
                         'user_email': message.fr},
-                  files={a.name: StringIO(a.content)})
+                  files={a.name: a.content}
+    )
 
 
 if __name__ == '__main__':
